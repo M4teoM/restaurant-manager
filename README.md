@@ -34,3 +34,6 @@ Convenciones de Commits
 • test: Agregar o modificar tests
 • refactor: Refactorización de código
 • docs: Cambios en documentación
+# restaurant-manager
+
+hola, estoy probando cambios en el readme
