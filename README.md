@@ -1,6 +1,6 @@
 # Restaurant Manager
 Sistema de gestión para restaurantes desarrollado en equipo.
-## eatures
+## Features
 - [ ] Gestión de menú (agregar/remover items)
 - [ ] Procesamiento de órdenes
 - [ ] Sistema de reservas
