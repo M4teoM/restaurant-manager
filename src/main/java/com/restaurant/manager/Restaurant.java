@@ -101,5 +101,17 @@ public String getStatisticsSummary() {
 		getAverageOrderValue()
 	);
 }
+public static void main(String[] args) {
+    System.out.println("=== Restaurant Manager ===");
+    DatabaseConnection.testConnection();
+
+    Restaurant restaurant = new Restaurant("La Pizzeria");
+    restaurant.addMenuItem("Pizza Margherita", 12.99);
+    restaurant.addMenuItem("Pasta Carbonara", 10.50);
+    restaurant.makeReservation("Carlos López", 4, "2025-11-04 19:00");
+
+    System.out.println();
+    System.out.println(restaurant.getStatisticsSummary());
+}
 }
 
