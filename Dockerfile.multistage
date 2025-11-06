@@ -1,0 +1,31 @@
+########################################
+# STAGE 1 — Build con Maven
+########################################
+FROM maven:3.9-eclipse-temurin-17 AS builder
+
+WORKDIR /build
+COPY pom.xml .
+RUN mvn -B -e dependency:go-offline
+
+COPY src ./src
+# Construye el jar y copia las dependencias a target/dependency
+RUN mvn -B -DskipTests clean package dependency:copy-dependencies -DoutputDirectory=target/dependency
+
+########################################
+# STAGE 2 — Runtime (JRE)
+########################################
+FROM eclipse-temurin:17-jre-jammy
+
+WORKDIR /app
+
+# Copiamos el jar y TODAS las dependencias
+COPY --from=builder /build/target/*.jar /app/app.jar
+COPY --from=builder /build/target/dependency /app/lib
+
+# (Opcional) documentar puerto
+EXPOSE 8080
+
+ENV JAVA_OPTS="-Xmx256m -Xms128m"
+
+# CLASSPATH incluye el jar y todas las libs (incl. el driver de PG)
+ENTRYPOINT ["sh","-c","java $JAVA_OPTS -cp /app/app.jar:/app/lib/* com.restaurant.manager.Restaurant"]

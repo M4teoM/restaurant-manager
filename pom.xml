@@ -36,33 +36,28 @@
       <version>${junit.jupiter.version}</version>
       <scope>test</scope>
     </dependency>
+
+<dependency>
+  <groupId>org.postgresql</groupId>
+  <artifactId>postgresql</artifactId>
+  <version>42.7.4</version>
+</dependency>
   </dependencies>
 
-  <build>
-    <!-- Declaración ACTIVA de plugins (no solo en pluginManagement) -->
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven.compiler.plugin.version}</version>
-        <configuration>
-          <!-- Usar la release 17 para alinear bootstrap + stdlib -->
-          <release>17</release>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${maven.surefire.plugin.version}</version>
-        <configuration>
-          <!-- Evita conflictos de módulo en JDK 17 -->
-          <useModulePath>false</useModulePath>
-          <!-- Detectar tests JUnit5 automáticamente -->
-          <includes>
-            <include>**/*Test.java</include>
-          </includes>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.3.0</version>
+      <configuration>
+        <archive>
+          <manifest>
+            <mainClass>com.restaurant.manager.Main</mainClass>
+          </manifest>
+        </archive>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
 </project>
